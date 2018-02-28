@@ -13,11 +13,20 @@
     <body>
 
          <div class="navigate-menu">Навигация:
-             <a href="/index">Домой</a>
-             <a href="/login">Авторизация</a>
-             <a href="/weather">Погода</a>
+             <a href="{{ url_for('index') }}">Домой</a>
+             <a href="{{ url_for('login') }}">Авторизация</a>
+             <a href="{{ url_for('weather') }}">Погода</a>
          </div>
          <hr>
+         {% with messages = get_flashed_messages() %}
+         {% if messages %}
+         <ul>
+             {% for message in messages %}
+             <li>{{ message }}</li>
+             {% endfor %}
+         </ul>
+         {% endif %}
+         {% endwith %}
          {% block content %}{% endblock %}
 
     </body>
