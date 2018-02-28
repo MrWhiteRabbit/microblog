@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import render_template
 from app import app
+from app.forms import LoginForm
 
 import requests, bs4, smtplib
 from email.mime.multipart import MIMEMultipart
@@ -27,6 +28,11 @@ def index():
     ]
     return render_template('index.html', title='Home', user=user, posts=posts)
 
+@app.route('/login')
+def login():
+    form = LoginForm()
+    return render_template('login.html', title='Авторизация', form=form)
+
 @app.route('/weather')
 def weather():
     user = {'username': 'Max'}
@@ -47,7 +53,7 @@ def weather():
 #    for el in range(0, len(city_arr)):
 #        city = city_arr[el]
 #    city = 'москва'
-    s = requests.get('https://sinoptik.com.ru/погода-москва')
+#    s = requests.get('https://sinoptik.com.ru/погода-москва')
 #    b = bs4.BeautifulSoup(s.text, 'html.parser')
 
 #    p3 = b.select('.temperature .p3')
