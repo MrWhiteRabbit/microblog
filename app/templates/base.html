@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru-ru">
+    <head>
+        <meta charset="UTF-8">
+        {% if title %}
+        <title>{{title}} - микроблог</title>
+        {% else %}
+        <title>У шамана три руки</title>
+        {% endif %}
+        <link  rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+    </head>
+    <body>
+
+         <div class="navigate-menu">Навигация:
+             <a href="/index">Домой</a>
+             <a href="/weather">Погода</a>
+         </div>
+         <hr>
+         {% block content %}{% endblock %}
+
+    </body>
+</html>

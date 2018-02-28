@@ -1,0 +1,11 @@
+{% extends "base.html"  %}
+{% block content %}
+      <div class="main">
+           <h1>Привет, {{ user.username }}, заходи!</h1>
+           <div class="headers-main">
+               {% for post in posts %}
+               <div><p>{{ post.author.username }} написал(а): <b>{{ post.body }}</b></p></div>
+               {% endfor %}
+           </div>
+      </div>
+{% endblock %}
