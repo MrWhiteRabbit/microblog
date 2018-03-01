@@ -2,9 +2,9 @@
 {% block content %}
       <div class="main">
           <h1>Отправим письмо о погоде, {{ user.username }}!</h1>
-          <div class="headers-main">
-              Странная надпись
+          <form action="/w" method="post">
+              <p>{{ form.submit() }}</p>
+          </form>
 
-          </div>
       </div>
 {% endblock %}
