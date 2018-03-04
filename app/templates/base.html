@@ -14,7 +14,11 @@
 
          <div class="navigate-menu">Навигация:
              <a href="{{ url_for('index') }}">Домой</a>
+             {% if current_user.is_anonymous %}
              <a href="{{ url_for('login') }}">Авторизация</a>
+             {% else %}
+             <a href="{{ url_for('logout') }}">Выход</a>
+             {% endif %}
              <a href="{{ url_for('weather') }}">Погода</a>
          </div>
          <hr>
