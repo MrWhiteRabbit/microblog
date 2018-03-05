@@ -13,13 +13,14 @@
     <body>
 
          <div class="navigate-menu">Навигация:
-             <a href="{{ url_for('index') }}">Домой</a>
+             <a href="{{ url_for('index') }}">Главная</a>
+             <a href="{{ url_for('weather') }}">Погода</a>
              {% if current_user.is_anonymous %}
-             <a href="{{ url_for('login') }}">Авторизация</a>
+             <a href="{{ url_for('login') }}">Вход</a>
              {% else %}
              <a href="{{ url_for('logout') }}">Выход</a>
              {% endif %}
-             <a href="{{ url_for('weather') }}">Погода</a>
+
          </div>
          <hr>
          {% with messages = get_flashed_messages() %}
