@@ -46,6 +46,23 @@ body {
     padding-top:0;
 }
 
+.main a{
+    text-decoration:none;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: rgba(255,255,255,0.7);
+}
+
+.main a:hover{
+    text-decoration:none;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #6666cc;
+    color: white;
+}
+
 .navigate-menu{
     width: 500px;
     border-radius: 5px;
@@ -72,4 +89,5 @@ form {
     width: 400px;
 
 }
+
 

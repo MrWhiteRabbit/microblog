@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, flash, redirect, url_for, request
-from app import app, db
+from app import app, db, routes, models, errors
 from datetime import datetime
 from app.forms import LoginForm, WeatherForm, RegistrationForm, EditProfileForm
 import requests, smtplib
+from app import conf #This module in the gitignore
 from bs4 import BeautifulSoup as bs
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -87,7 +88,7 @@ def user(username):
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    form = EditProfileForm()
+    form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
@@ -109,25 +110,12 @@ def before_request():
 @app.route('/w', methods=['POST'])
 @login_required
 def w():
-#    form = WeatherForm()
-#    user = User.query.filter_by(username=form.username.data).first()
-    fromaddr = 'mg.test.robot@gmail.com'
-    mypass = '27RoBot27'
-    toaddr = "mgodkin@gmail.com"
-#    toaddr = user.email
 
-    city_arr = [
-        'москва',
-        'ставрополь',
-        'ростов-на-дону',
-        'иву'
-    ]
-
-    f = open('weather.txt', 'w')
+    f = open(conf.weather_file, 'w')
     f.write('Привет, Семья! Вот прогноз погоды в наших городах на сегодня:' + '\n' + '\n')
 
-    for el in range(0, len(city_arr)):
-        city = city_arr[el]
+    for el in range(0, len(conf.city_arr)):
+        city = conf.city_arr[el]
         rqst = requests.get('https://sinoptik.com.ru/погода-' + city)
         soup = bs(rqst.text, 'html.parser')
 
@@ -161,21 +149,21 @@ def w():
 
     f.close()
 
-    with open('weather.txt', 'r') as f:
+    with open(conf.weather_file, 'r') as f:
         msg_body = f.read()
 
     msg = MIMEMultipart()
-    msg['From'] = fromaddr
-    msg['To'] = toaddr
+    msg['From'] = conf.fromaddr
+    msg['To'] = conf.toaddr
     msg['Subject'] = 'Привет от погодного робота'
 
     msg.attach(MIMEText(str(msg_body), 'plain'))
 
-    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server = smtplib.SMTP(conf.serv, conf.port)
     server.starttls()
-    server.login(fromaddr, mypass)
+    server.login(conf.fromaddr, conf.mypass)
     text = msg.as_string()
-    server.sendmail(fromaddr, toaddr, text)
+    server.sendmail(conf.fromaddr, conf.toaddr, text)
     server.quit()
 
     return redirect(url_for('index'))
