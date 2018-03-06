@@ -28,6 +28,7 @@ wheels/
 .installed.cfg
 *.egg
 *.db
+weather.txt
 app/conf.py
 
 # PyInstaller

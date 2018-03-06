@@ -1,7 +1,7 @@
 {% extends "base.html"  %}
 {% block content %}
       <div class="main">
-          <h1>Отправим письмо о погоде, {{ current_user.username }}!</h1>
+          <h2>Отправим письмо о погоде, {{ current_user.username }}!</h2>
           <form action="/w" method="post">
               <p>{{ form.submit() }}</p>
           </form>

@@ -31,7 +31,7 @@ def index():
             'body': 'Какая гадость эта ваша заливная рыба!'
         }
     ]
-    return render_template('index.html', title='Home', posts=posts)
+    return render_template('index.html', title='Главная', posts=posts)
 
 
 
@@ -80,8 +80,8 @@ def register():
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
+        {'author': user, 'body': 'Тестовое сообщение #1'},
+        {'author': user, 'body': 'Тестовое сообщение #2'}
     ]
     return render_template('user.html', user=user, posts=posts)
 

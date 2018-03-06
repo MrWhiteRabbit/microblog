@@ -1,7 +1,7 @@
 {% extends "base.html"  %}
 {% block content %}
       <div class="main">
-           <h1>Привет, {{ current_user.username }}, заходи!</h1>
+           <h2>Будь как дома, {{ current_user.username }}!</h2>
                {% for post in posts %}
                     <p>{{ post.author.username }} написал(а): <b>{{ post.body }}</b></p>
                {% endfor %}

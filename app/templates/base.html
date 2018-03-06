@@ -23,7 +23,7 @@
              {% endif %}
 
          </div>
-         <hr>
+         <hr class='navigate-menu-hr'>
          {% with messages = get_flashed_messages() %}
          {% if messages %}
          <ul>
@@ -34,6 +34,9 @@
          {% endif %}
          {% endwith %}
          {% block content %}{% endblock %}
-
+          <hr class='navigate-menu-hr'>
+          <div class='footer'>
+              <p>Сделано в <a href="https://www.sberbank.ru">нечеловеческих</a> условиях :)</p>
+          </div>
     </body>
 </html>

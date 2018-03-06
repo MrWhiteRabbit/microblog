@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="main">
-         <h1>Авторизация</h1>
+         <h2>Добро пожаловать!</h2>
             <form action="" method="post">
             {{ form.hidden_tag() }}
             <p>
@@ -20,7 +20,7 @@
             </p>
             <p>{{ form.remember_me }} {{ form.remember_me.label }}</p>
             <p>{{ form.submit() }}</p>
-            <p>Новый пользователь? <a href="{{ url_for('register') }}">Нажми для регистрации!</a></p>
+            <p class='reg-msg'>Новый пользователь? <a href="{{ url_for('register') }}">Нажми для регистрации!</a></p>
             </form>
 
     </div>

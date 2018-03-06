@@ -1,6 +1,7 @@
 <table>
     <tr valign="top">
-        <td><img src="{{ post.author.avatar(36) }}"></td>
-        <td>{{ post.author.username }} написал(а): <br> {{ post.body }}</td>
+        <td class='avatar-mini'><img src="{{ post.author.avatar(36) }}"></td>
+        <td><span class='author-post'>{{ post.author.username }} написал(а):</span><br>
+            <span class='body-post'>{{ post.body }}</span></td>
     </tr>
 </table>
