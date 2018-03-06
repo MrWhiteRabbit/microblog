@@ -1,6 +1,6 @@
 fromaddr = 'mg.test.robot@gmail.com'
-mypass = '27RoBot27'
-toaddr = 'mgodkin@gmail.com'
+mypass = ''
+toaddr = 'mg@gmail.com'
 serv = 'smtp.gmail.com'
 port = 587
 
