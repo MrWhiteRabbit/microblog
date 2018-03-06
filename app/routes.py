@@ -101,6 +101,38 @@ def edit_profile():
     return render_template('edit_profile.html', title='Редактировать профиль', form=form)
 
 
+@app.route('/follow/<username>')
+@login_required
+def follow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        flash('Пользователь {} не найден.'.format(username))
+        return redirect(url_for('index'))
+    if user == current_user:
+        flash('Вы не можете подписаться на себя.')
+        return redirect(url_for('user', username=username))
+    current_user.follow(user)
+    db.session.commit()
+    flash('Вы подписались на {}'.format(username))
+    return redirect(url_for('user', username=username))
+
+
+@app.route('/unfollow/<username>')
+@login_required
+def unfollow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        flash('Пользователь {} не найден.'.format(username))
+        return redirect(url_for('index'))
+    if user == current_user:
+        flash('Вы не можете отписаться от себя.')
+        return redirect(url_for('user', username=username))
+    current_user.unfollow(user)
+    db.session.commit()
+    flash('Вы отписались от {}'.format(username))
+    return redirect(url_for('user', username=username))    
+
+
 @app.before_request
 def before_request():
     if current_user.is_authenticated:
