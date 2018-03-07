@@ -146,8 +146,8 @@ def w():
     f = open(conf.weather_file, 'w')
     f.write('Привет, Семья! Вот прогноз погоды в наших городах на сегодня:' + '\n' + '\n')
 
-    for el in range(0, len(conf.city_arr)):
-        city = conf.city_arr[el]
+    for element in range(0, len(conf.city_arr)):
+        city = conf.city_arr[element]
         rqst = requests.get('https://sinoptik.com.ru/погода-' + city)
         soup = bs(rqst.text, 'html.parser')
 
@@ -180,10 +180,11 @@ def w():
             'Хорошего всем настроения! Ваш робот.' + '\n')
 
     f.close()
+    flash('Данные сформированы.')    
 
     with open(conf.weather_file, 'r') as f:
         msg_body = f.read()
-
+        
     msg = MIMEMultipart()
     msg['From'] = conf.fromaddr
     msg['To'] = conf.toaddr
@@ -197,8 +198,8 @@ def w():
     text = msg.as_string()
     server.sendmail(conf.fromaddr, conf.toaddr, text)
     server.quit()
-
-    return redirect(url_for('index'))
+    flash('Данные отправлены.')
+    return redirect(url_for('weather'))
 
 
 @app.route('/weather', methods=['GET', 'POST'])
