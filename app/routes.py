@@ -139,6 +139,7 @@ def before_request():
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
 
+#parsing weather site function. 
 @app.route('/w', methods=['POST'])
 @login_required
 def w():
