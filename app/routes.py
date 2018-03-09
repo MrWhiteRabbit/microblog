@@ -2,36 +2,31 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db, routes, models, errors
 from datetime import datetime
-from app.forms import LoginForm, WeatherForm, RegistrationForm, EditProfileForm
+from app.forms import LoginForm, WeatherForm, RegistrationForm, EditProfileForm, PostForm
 import requests, smtplib
 from app import conf #This module in the gitignore
 from bs4 import BeautifulSoup as bs
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Post
 from werkzeug.urls import url_parse
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'Hmmm... Its ok blog!'
-        },
-        {
-            'author': {'username': 'Ипполит'},
-            'body': 'Какая гадость эта ваша заливная рыба!'
-        }
-    ]
-    return render_template('index.html', title='Главная', posts=posts)
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body=form.post.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Твой пост опубликован!')
+        return redirect(url_for('index'))
+
+    posts = current_user.followed_posts().all()    
+    return render_template('index.html', title='Главная', form=form, posts=posts)
 
 
 

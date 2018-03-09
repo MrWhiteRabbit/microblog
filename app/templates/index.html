@@ -1,9 +1,23 @@
 {% extends "base.html"  %}
+
 {% block content %}
       <div class="main">
            <h2>Будь как дома, {{ current_user.username }}!</h2>
-               {% for post in posts %}
-                    <p>{{ post.author.username }} написал(а): <b>{{ post.body }}</b></p>
-               {% endfor %}
+           <form action='' method='post'>
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.post.label }}<br>
+                    {{ form.post(cols=32, rows=4) }}<br>
+                    {% for error in form.post.errors %}
+                        <span style='color: red;'>[{{ error }}]</span>
+                    {% endfor %}    
+                </p>
+               <p>
+                   {{ form.submit() }}
+               </p>
+           </form>
+            {% for post in posts %}
+                <p>{{ post.author.username }} написал(а): <b>{{ post.body }}</b></p>
+            {% endfor %}
       </div>
 {% endblock %}
