@@ -134,6 +134,10 @@ form {
     font-size: 11px;    
 }
 
+.new-post{
+    border-radius: 5px;
+}
+
 .footer{
     width: 97%;
     padding:1px 5px 1px 5px;
@@ -142,3 +146,4 @@ form {
     background-color: rgba(255,255,255,0.3);
     border-radius: 10px;
 }
+
