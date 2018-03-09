@@ -1,7 +1,10 @@
 <table>
     <tr valign="top">
         <td class='avatar-mini'><img src="{{ post.author.avatar(36) }}"></td>
-        <td><span class='author-post'>{{ post.author.username }} написал(а):</span><br>
-            <span class='body-post'>{{ post.body }}</span></td>
+        <td>
+            <a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a>
+            <span class='author-post'> написал(а):</span><br>
+            <span class='body-post'>{{ post.body }}</span>
+        </td>
     </tr>
 </table>

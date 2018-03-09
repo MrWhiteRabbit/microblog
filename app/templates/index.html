@@ -3,6 +3,7 @@
 {% block content %}
       <div class="main">
            <h2>Будь как дома, {{ current_user.username }}!</h2>
+           {% if form %}
            <form action='' method='post'>
                 {{ form.hidden_tag() }}
                 <p>
@@ -16,8 +17,9 @@
                    {{ form.submit() }}
                </p>
            </form>
-            {% for post in posts %}
-                <p>{{ post.author.username }} написал(а): <b>{{ post.body }}</b></p>
-            {% endfor %}
+           {% endif %}
+           {% for post in posts %}
+            {% include '_post.html' %}
+           {% endfor %}
       </div>
 {% endblock %}

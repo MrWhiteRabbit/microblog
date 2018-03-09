@@ -15,6 +15,7 @@
          <div class="navigate-menu">Навигация:
              <a href="{{ url_for('index') }}">Главная</a>
              <a href="{{ url_for('user', username=current_user.username) }}">Профиль</a>
+             <a href="{{ url_for('explore') }}">Поиск</a>
              <a href="{{ url_for('weather') }}">Погода</a>
              {% if current_user.is_anonymous %}
              <a href="{{ url_for('login') }}">Вход</a>
