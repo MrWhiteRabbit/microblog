@@ -2,7 +2,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db, routes, models, errors
 from datetime import datetime
-from app.forms import LoginForm, WeatherForm, RegistrationForm, EditProfileForm, PostForm
+from app.forms import LoginForm, WeatherForm, RegistrationForm, EditProfileForm, PostForm, ExcelForm
 import requests, smtplib
 from app import conf #This module in the gitignore
 from bs4 import BeautifulSoup as bs
@@ -37,10 +37,10 @@ def index():
         posts=posts.items, next_url=next_url, prev_url=prev_url)
 
 
-@app.route('/xls')
+@app.route('/xls', methods=['GET', 'POST'])
 @login_required
 def xls():
-    form = PostForm()
+    form = ExcelForm()
     file = 'v.xlsx'
     xl = pd.ExcelFile(file)
     sn = xl.sheet_names
@@ -48,7 +48,8 @@ def xls():
     writer = pd.ExcelWriter('e1.xlsx', engine='xlsxwriter')
     data = pd.read_excel('v.xlsx', index_col='ID')
     data.to_excel(writer, 'Sheet1')
-    return render_template('index.html', title='Главная', form=form)
+    flash('Данные выгружены.')
+    return render_template('xls.html', title='Главная', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
