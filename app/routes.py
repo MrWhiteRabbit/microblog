@@ -40,13 +40,15 @@ def index():
 @app.route('/xls')
 @login_required
 def xls():
-    file = 'v.xls'
+    form = PostForm()
+    file = 'v.xlsx'
     xl = pd.ExcelFile(file)
     sn = xl.sheet_names
     df1 = xl.parse(sn)
     writer = pd.ExcelWriter('e1.xlsx', engine='xlsxwriter')
     data = pd.read_excel('v.xlsx', index_col='ID')
     data.to_excel(writer, 'Sheet1')
+    return render_template('index.html', title='Главная', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
