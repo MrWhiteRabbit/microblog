@@ -12,7 +12,9 @@
                 <td class='user-info'>
                     <h2>{{ user.username }}</h2>
                     {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-                    {% if user.last_seen %}<p class='last-seen'>Последний раз был: {{ user.last_seen }}</p>{% endif %}
+                    {% if user.last_seen %}
+                        <p class='last-seen'>Последний раз был: {{ user.last_seen }}</p>
+                    {% endif %}
                     <p>{{ user.followers.count() }} подписаны на вас, а вы подписаны на {{ user.followed.count() }}</p>
                     {% if user != current_user %}
                         {% if not current_user.is_following(user) %}

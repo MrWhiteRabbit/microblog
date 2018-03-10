@@ -9,6 +9,9 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Запомнить')
     submit = SubmitField('Войти')
 
+class XlsxForm(FlaskForm):
+    submit = SubmitField('Запустить')
+
 class WeatherForm(FlaskForm):
     submit = SubmitField('Отправить погоду')
 
