@@ -14,5 +14,6 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
+login.login_message = 'Пожалуйста, войдите, чтобы открыть эту страницу.'
 
 from app import routes, models

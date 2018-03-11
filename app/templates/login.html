@@ -1,28 +1,14 @@
 {% extends "base.html" %}
-{% block content %}
-    <div class="main">
-         <h2>Добро пожаловать!</h2>
-            <form action="" method="post">
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.username.label }}<br>
-                {{ form.username(size=32) }}
-                {% for error in form.username.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.password.label }}<br>
-                {{ form.password(size=32) }}
-                {% for error in form.password.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>{{ form.remember_me }} {{ form.remember_me.label }}</p>
-            <p>{{ form.submit() }}</p>
-            <p class='reg-msg'>Новый пользователь? <a href="{{ url_for('register') }}">Нажми для регистрации!</a></p>
-            </form>
+{% import 'bootstrap/wtf.html' as wtf %}
 
-    </div>
+{% block app_content %}
+         <h2>Добро пожаловать!</h2>
+            <div class='row'>
+                <div class='col-md-4'>
+                    {{ wtf.quick_form(form) }}            
+                </div>
+                
+            </div>
+
 
 {% endblock %}
