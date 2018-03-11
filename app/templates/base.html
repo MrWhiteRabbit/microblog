@@ -38,13 +38,7 @@
             </div>
         </div>
     </nav>
-    <div class='navbar-fixed-bottom row-fluid'>
-        <div class='navbar-inner'>
-            <div class='container'>
-                <p>Сделано в <a href="https://www.sberbank.ru">нечеловеческих</a> условиях :)</p>        
-            </div>
-        </div>
-    </div>
+    
 {% endblock%}         
          
 {% block content %}
@@ -57,5 +51,12 @@
             {% endif %}        
         {% endwith %}    
         {% block app_content %}{% endblock %}
+    </div>
+    <div class='navbar navbar-default navbar-bottom'>
+        <div class='navbar-inner'>
+            <div class='container'>
+                <p>Сделано в <a href="https://www.sberbank.ru">нечеловеческих</a> условиях :)</p>        
+            </div>
+        </div>
     </div>
 {% endblock %}
