@@ -208,9 +208,23 @@ def w():
     people_weather = pw[0].getText()
 
     f.write('----------------------------------' + '\n' +
-            '\n' + people_weather.strip() + '\n' + '\n' +
-            '----------------------------------' + '\n' + '\n' +
-            'Хорошего всем настроения! Ваш робот.' + '\n')
+        '\n' + people_weather.strip() + '\n' + '\n' +
+        '----------------------------------' + '\n')
+
+    rqst_news = requests.get('https://eadaily.com/ru/dossier/etot-den-v-istorii')
+    soup_news = bs(rqst_news.text, 'html.parser')
+
+    f.write('А вот что произошло в этот день в истории Человечества: ' + '\n')
+    
+    news = soup_news.select('.news-feed a')
+    for i in news:
+        a = i.getText()
+        b = a[a.find(': '):]
+        f.write(b + '\n')
+
+    f.write('----------------------------------' + '\n' +
+        'Хорошего всем настроения! Ваш новостной робот. :)')
+
 
     f.close()
     flash('Данные сформированы.')    
@@ -221,7 +235,7 @@ def w():
     msg = MIMEMultipart()
     msg['From'] = conf.fromaddr
     msg['To'] = conf.toaddr
-    msg['Subject'] = 'Привет от погодного робота'
+    msg['Subject'] = 'Привет от робота'
 
     msg.attach(MIMEText(str(msg_body), 'plain'))
 

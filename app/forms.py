@@ -13,7 +13,7 @@ class ExcelForm(FlaskForm):
     submit = SubmitField('Запустить')
 
 class WeatherForm(FlaskForm):
-    submit = SubmitField('Отправить погоду')
+    submit = SubmitField('Отправить письмо')
 
 class RegistrationForm(FlaskForm):
     username = StringField('Имя пользователя', validators=[DataRequired()])
